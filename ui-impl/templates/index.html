@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <!-- content -->
+    <h1>Patient Report Form 👨‍⚕️</h1>
+    <div class="box">
+
+
+        <form action="gen_report"   method="post">
+            <div class="flex-box">
+                <label for="clinic-name">Clinic name:</label>
+                <input type="text" id="clinic-name" placeholder="clinic name">
+                <label for="clinic-logo">clinic-logo:</label>
+                <input type="text" id="clinic-logo" placeholder="clinic logo">
+            </div>
+
+            <div class="flex-box">
+                 <label for="physician-name">physician-name:</label>
+              <input type="text" id="physician-name" placeholder="physician-name">
+                 <label for="physician-contact">physician-contact:</label>
+              <input type="text" id="physician-contact" placeholder="contact info">
+            </div>
+
+            <div class="flex-box">
+                <label for="p-name">physician-contact:</label>
+                <input type="text" id="p-name" placeholder="Patient first name">
+                <label for="p-last-name">physician-contact:</label>
+                <input type="text" id="p-last-name" placeholder="Patient last name">
+            </div>
+
+            <div class="flex-box">
+                <label for="p-dob">physician-contact:</label>
+                <input type="text" id="p-dob" placeholder="DoB">
+                <label for="p-contact">physician-contact:</label>
+                <input type="text" id="p-contact" placeholder="patient address">
+            </div>
+
+
+          <div class="flex-box">
+              <label for="input-message">physician-contact:</label>
+            <textarea name="message" type="text" id="input-message" placeholder="Message"></textarea>
+              <br>
+              <label for="input-message-2">physician-contact:</label>
+              <textarea name="message" type="text" id="input-message-2" placeholder="Message"></textarea>
+
+          </div>
+
+            <div class="flex-box-end">
+               <center> <input type="submit" value="Generate report" id="input-submit"> </center>
+            </div>
+
+
+        </form>
+
+
+    </div>
+</body>
+</html>
