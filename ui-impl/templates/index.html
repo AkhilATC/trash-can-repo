@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
 </head>
 <body>
+    {% if error %}
+    <p class="flashes"><strong>🚩 Error:</strong> {{ error }}
+  {% endif %}
     <!-- content -->
     <h1>Patient Report Form 👨‍⚕️</h1>
     <div class="box">
