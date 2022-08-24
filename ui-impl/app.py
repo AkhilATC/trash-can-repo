@@ -9,6 +9,7 @@ app = Flask(__name__)
 def login():
     return render_template('index.html')
 
+
 @app.route('/gen_report', methods=['POST'])
 def gen_report():
     clinic_name = request.form.get('clinic-name', None)
@@ -33,6 +34,10 @@ def gen_report():
     # notes
     c_note = request.form.get('input-message')
     con_note = request.form.get('input-message-2')
+    check_list = [clinic_name,physician_name,physician_contact,patient_fname,patient_lname,patient_dob,patient_contact,c_note,con_note]
+    if all(i is None for i in check_list):
+        print('all items in the list are None')
+        return redirect(url_for("/"))
     resp = pdf_gen.__generate_pdf_attributes(
         clinic_name,
         clinic_logo,
