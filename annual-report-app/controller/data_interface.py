@@ -26,4 +26,4 @@ def fetch_annual_data():
             'gas': gas_sum,
             'brine': brine_sum
         })
-    return jsonify({'message':"can't fetch data invalid inputs"}), 400
+    return jsonify({'message': "can't fetch data invalid inputs"}), 400
