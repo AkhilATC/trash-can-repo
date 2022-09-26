@@ -1,0 +1,33 @@
+from factory import mongo_db
+from flask import Blueprint, request, jsonify
+
+auth_module = Blueprint("auth_module", __name__, url_prefix="/auth")
+
+
+@auth_module.route("/", methods=['GET'])
+def auth_app_info():
+    """
+    discription: ping route for chat controller
+    :return:
+    """
+    return jsonify({
+        "app-name": r"Charlar",
+        "contoller": "Auth",
+        "info": "api -testing"
+    }), 200
+
+
+@auth_module.route("/sign_up", methods=['POST'])
+def sign_up():
+    """
+
+    :return:
+    """
+    payload = request.json
+    if all([payload.get(x,None) for x in ['name', 'email', 'password']]):
+        is_exists = list(mongo_db.db.users.find({"$or":[{'name': payload["name"]}, {'email': payload['email']}]}))
+        if is_exists:
+            return jsonify({"message":"user already exists , try another email or password"}),404
+        mongo_db.db.users.insert_one(payload)
+        return jsonify({'message': 'New user added successfully'}), 201
+    return jsonify({'message': 'Required infos missing'}), 404
