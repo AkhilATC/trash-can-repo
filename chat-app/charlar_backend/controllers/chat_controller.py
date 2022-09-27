@@ -4,6 +4,7 @@ from flask_jwt_extended import jwt_required
 from datetime import datetime
 from factory import mongo_db
 from json import dumps
+from bson.objectid import ObjectId
 
 
 chat_module = Blueprint("chat_module", __name__, url_prefix="/chat")
@@ -52,8 +53,53 @@ def fetch_posts():
     :return:
     """
     try:
-        data = list(mongo_db.db.chats.find({}))
+        aggs_query = [
+            {
+                "$match": {
+                    "thought": {
+                        "$exists": True
+                    }
+                }
+            },
+            {
+                "$project": {
+                    "thought": 1,
+                    "wrote_by": 1,
+                    "created_on": 1,
+                    "title": 1,
+                    "is_self_thought": {
+                        "$cond": [
+                            {
+                                "$eq": [
+                                    "$wrote_by",
+                                     get_jwt_identity() or ""
+                                ]
+                            },
+                            True,
+                            False
+                        ]
+                    }
+                }
+            }
+        ]
+        data = list(mongo_db.db.chats.aggregate(aggs_query))
         return Response(dumps(data, default=str), mimetype='application/json')
     except Exception as e:
         print(e)
-        return jsonify({'message':'Failed'}), 500
+        return jsonify({'message': 'Failed'}), 500
+
+
+@chat_module.route("/delete/<id>", methods=['delete'])
+@jwt_required()
+def delete(id):
+    """
+
+    :return:
+    """
+    try:
+        record = mongo_db.db.chats.find_one({"_id": ObjectId(id)})
+        if record:
+            mongo_db.db.chats.delete_one({"_id": ObjectId(id)})
+        return jsonify({"message":"Deleted"}), 200
+    except Exception as e:
+        return jsonify({'message': "failed"}), 500

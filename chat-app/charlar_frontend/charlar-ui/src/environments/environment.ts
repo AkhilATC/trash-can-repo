@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  auth_api_url: "http://localhost:5900/auth/login"
+  auth_api_url: "http://localhost:5900/auth/login",
+  chat_api_uri: "http://localhost:5900/chat"
 };
 
 /*

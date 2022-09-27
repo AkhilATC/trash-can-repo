@@ -1,1 +1,18 @@
-<p>chandler-view works!</p>
+<div class="con">
+
+
+<div *ngFor="let each of chat_info">
+    <mat-card class="example-card">
+        <mat-card-title>{{each.title}}</mat-card-title>
+        <mat-card-subtitle>{{each.wrote_by}} posts this on :⌛ {{each.created_on}}</mat-card-subtitle> 
+        <mat-card-content>
+          <p>{{ each.thought }}</p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button *ngIf= "each.is_self_thought" mat-button (click)="deleteNote(each._id)">🗑️</button>
+        </mat-card-actions>
+      </mat-card>
+</div> 
+<p *ngIf="!chat_info"> 🙅‍♂️ Posts are not avilable</p> 
+
+</div>

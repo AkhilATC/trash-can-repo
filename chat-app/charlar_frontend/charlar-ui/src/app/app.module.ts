@@ -7,8 +7,12 @@ import { FormsModule } from '@angular/forms';
 import { ChandlerViewComponent } from './chandler-view/chandler-view.component';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginViewComponent } from './login-view/login-view.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
+import { JwtInterceptor } from './_helper/jwt.interceptor';
+import {MatCardModule} from '@angular/material/card';
+
+
 
  
 @NgModule({
@@ -19,13 +23,13 @@ import { SignupComponent } from './signup/signup.component';
     SignupComponent
   ],
   imports: [
-    
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

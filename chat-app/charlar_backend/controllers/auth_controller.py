@@ -47,4 +47,4 @@ def log_in():
     if not is_authenticate:
         return jsonify({'message': 'user-name or password is incorrect'}), 401
     access_token = create_access_token(identity=username)
-    return jsonify({'user': username, 'access_token': access_token}), 200
+    return jsonify({'user': username, 'token': access_token}), 200
