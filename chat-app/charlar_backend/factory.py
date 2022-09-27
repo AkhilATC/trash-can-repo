@@ -5,11 +5,11 @@ sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 from flask import Flask
 from flask_pymongo import PyMongo
 import config
-
+from flask_jwt_extended import JWTManager
 
 mongo_db = PyMongo()
 app = Flask(__name__)
-
+jwt = JWTManager(app)
 def setup_flask_app():
     app.config.from_object(config.Config)
     from controllers.auth_controller import auth_module

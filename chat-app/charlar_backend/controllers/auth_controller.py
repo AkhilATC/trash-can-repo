@@ -1,5 +1,6 @@
 from factory import mongo_db
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import create_access_token
 
 auth_module = Blueprint("auth_module", __name__, url_prefix="/auth")
 
@@ -31,3 +32,18 @@ def sign_up():
         mongo_db.db.users.insert_one(payload)
         return jsonify({'message': 'New user added successfully'}), 201
     return jsonify({'message': 'Required infos missing'}), 404
+
+
+@auth_module.route("login", methods=['POST'])
+def log_in():
+    """
+
+    :return:
+    """
+    username = request.json.get("username", None)
+    password = request.json.get("password", None)
+    is_authenticate = mongo_db.db.users.find_one({'name': username, 'password': password})
+    if not is_authenticate:
+        return jsonify({'message': 'user-name or password is incorrect'}), 401
+    access_token = create_access_token(identity=username)
+    return jsonify({'user': username, 'access_token': access_token}), 200
