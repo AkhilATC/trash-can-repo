@@ -10,6 +10,8 @@ from flask_jwt_extended import JWTManager
 mongo_db = PyMongo()
 app = Flask(__name__)
 jwt = JWTManager(app)
+
+
 def setup_flask_app():
     app.config.from_object(config.Config)
     from controllers.auth_controller import auth_module
