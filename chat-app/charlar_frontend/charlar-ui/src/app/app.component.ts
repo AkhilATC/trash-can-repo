@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from './_models/user';
+import { AuthenticationServiceService } from './_service/authentication-service.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +10,17 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'charlar-ui';
-  public isLogedIn = localStorage.getItem('user') == undefined ? false : true;
+  currentUser: User;
 
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationServiceService
+) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+}
+
+logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
+}
 }

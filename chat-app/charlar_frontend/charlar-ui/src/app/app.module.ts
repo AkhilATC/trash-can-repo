@@ -7,22 +7,23 @@ import { FormsModule } from '@angular/forms';
 import { ChandlerViewComponent } from './chandler-view/chandler-view.component';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginViewComponent } from './login-view/login-view.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SignupComponent } from './signup/signup.component';
 
- const appRoutes: Routes = [
  
-  { path: 'chandler',component: ChandlerViewComponent}
-];
 @NgModule({
   declarations: [
     AppComponent,
     ChandlerViewComponent,
-    LoginViewComponent
+    LoginViewComponent,
+    SignupComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes),
+    
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

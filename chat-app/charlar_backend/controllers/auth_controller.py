@@ -42,6 +42,7 @@ def log_in():
     """
     username = request.json.get("username", None)
     password = request.json.get("password", None)
+    print(username)
     is_authenticate = mongo_db.db.users.find_one({'name': username, 'password': password})
     if not is_authenticate:
         return jsonify({'message': 'user-name or password is incorrect'}), 401
