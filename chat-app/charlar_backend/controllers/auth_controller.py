@@ -25,13 +25,13 @@ def sign_up():
     :return:
     """
     payload = request.json
-    if all([payload.get(x,None) for x in ['name', 'email', 'password']]):
-        is_exists = list(mongo_db.db.users.find({"$or":[{'name': payload["name"]}, {'email': payload['email']}]}))
+    if all([payload.get(x,None) for x in ['name', 'first_name', 'last_name', 'password']]):
+        is_exists = list(mongo_db.db.users.find({'name': payload["name"]}))
         if is_exists:
-            return jsonify({"message":"user already exists , try another email or password"}),404
+            return jsonify({"message": "user already exists , try another email or password"}),404
         mongo_db.db.users.insert_one(payload)
         return jsonify({'message': 'New user added successfully'}), 201
-    return jsonify({'message': 'Required infos missing'}), 404
+    return jsonify({'message': 'Required info\'s missing'}), 404
 
 
 @auth_module.route("login", methods=['POST'])

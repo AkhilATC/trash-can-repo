@@ -11,6 +11,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
 import { JwtInterceptor } from './_helper/jwt.interceptor';
 import {MatCardModule} from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -20,14 +26,21 @@ import {MatCardModule} from '@angular/material/card';
     AppComponent,
     ChandlerViewComponent,
     LoginViewComponent,
-    SignupComponent
+    SignupComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule
+    
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]

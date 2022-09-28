@@ -9,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class ChandlerViewComponent implements OnInit {
 
 
-  public chat_info :any= []
+  public chat_info :any= [];
+  public titleValue;
+  public noteValue;
+  public msg:string = "Share your thoughts now 💡";
 
   constructor(public chatServiceService: ChatServiceService) { }
 
@@ -27,7 +30,31 @@ export class ChandlerViewComponent implements OnInit {
 
   }
   deleteNote(noteId){
-    console.log(noteId);
+    this.chatServiceService.deleteThoughts(noteId)
+          .subscribe((data)=>{
+            this.loadChats();
+          },error  => {
+            console.log(error)            
+            });
+  }
+  pushNote(){
+    console.log("value here",this.titleValue,this.noteValue)
+    let payloads = {
+      'title':this.titleValue,
+      'thought':this.noteValue
+    }
+    this.chatServiceService.pushThoughts(payloads)
+          .subscribe((data)=>{            
+            this.loadChats();
+            this.msg = data['message'];
+            
+            
+          },error  => {
+            console.log(error)
+            this.msg =  error.message
+            
+            });
+
   }
 
 }
