@@ -11,9 +11,9 @@
 
 2. frontend
 
-> install prerequisites (node:v10.17.0, npm: 6.11.3,Angular CLI: 10.2.1)
-> Go to source directory (charlar_frontend/charlar-ui)
-> ng serve
+> 1. Install prerequisites (node:v10.17.0, npm: 6.11.3,Angular CLI: 10.2.1)
+> 2. Go to source directory (charlar_frontend/charlar-ui)
+> 3. ng serve
 
 
 
