@@ -89,7 +89,7 @@ def fetch_posts():
         return jsonify({'message': 'Failed'}), 500
 
 
-@chat_module.route("/delete/<id>", methods=['delete'])
+@chat_module.route("/delete/<id>", methods=['DELETE'])
 @jwt_required()
 def delete(id):
     """
@@ -100,6 +100,6 @@ def delete(id):
         record = mongo_db.db.chats.find_one({"_id": ObjectId(id)})
         if record:
             mongo_db.db.chats.delete_one({"_id": ObjectId(id)})
-        return jsonify({"message":"Deleted"}), 200
+        return jsonify({"message": "Deleted"}), 200
     except Exception as e:
         return jsonify({'message': "failed"}), 500
